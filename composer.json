@@ -1,0 +1,35 @@
+{
+    "name": "cochalito/prueba-practica-startup",
+    "description": "Descripcion de practica",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "12.2.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "12.2.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cochalito\\PruebaPracticaStartup\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cochalito\\PruebaPracticaStartup\\": "src/"
+        }
+    },
+    "script": {
+        "test": [
+            "vendor/bin/phpunit -c tests/phpunit.xml",
+            "vendor/bin/phpunit --testdox --colors=always --testsuite Unit"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Brayan Pereyra",
+            "email": "brayan.angel@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
