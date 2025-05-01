@@ -2,37 +2,38 @@
 
 declare(strict_types=1);
 
-namespace App\PruebaPracticaStartup\Classes;
+namespace App\PruebaPracticaStartup\Views;
 
-use PDOStatement;
-
-class Drawer
+class Publisher
 {
-    private function drawNotification(string $type, string $title, string $message, string $footer = ''): string
+    public function showView(string $type, array $params): void
     {
-        $print = '';
+        $messageBody = '';
+
         switch ($type) {
             case 'success':
-                $print .= "\n\e[0;32m" . $title . "\e[0m\n";
+                $messageBody .= "\n\e[0;32m" . $params['title'] . "\e[0m\n";
                 break;
             case 'error':
-                $print .= "\n\e[0;31m" . $title . "\e[0m\n";
+                $messageBody .= "\n\e[0;31m" . $params['title'] . "\e[0m\n";
                 break;
             case 'info':
-                $print .= "\n\e[0;36m" . $title . "\e[0m\n";
+                $messageBody .= "\n\e[0;36m" . $params['title'] . "\e[0m\n";
                 break;
             case 'warning':
             default:
-                $print .= "\n\e[0;33m" . $title . "\e[0m\n";
+                $messageBody .= "\n\e[0;33m" . $params['title'] . "\e[0m\n";
                 break;
         }
-        $print .= "\033[1m" . $message . "\033[0m\n\n";
+        $messageBody .= "\033[1m" . $params['message'] . "\033[0m\n\n";
 
-        if (!empty($footer)) {
-            $print .= "\n\n$footer\n\n";
+        if (!empty($params['footer'])) {
+            $messageBody .= "\n\n{$params['footer']}\n\n";
         }
-        return $print;
+
+        echo $messageBody;
     }
+
     public function drawNoData(): string
     {
         $title = 'Sin registros.';

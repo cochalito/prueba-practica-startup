@@ -7,7 +7,7 @@ namespace App\PruebaPracticaStartup\Interfaces;
 use PDO;
 
 interface ConnectionInterface {
-    public function createConnection(): void;
+    public function createConnection(): bool;
 
     public function closeConnection(): void;
     
