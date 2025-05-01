@@ -11,13 +11,19 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Cochalito\\PruebaPracticaStartup\\": "src/"
-        }
+            "App\\PruebaPracticaStartup\\": "src/"
+        },
+        "files": [
+            "src/Bootstrap.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Cochalito\\PruebaPracticaStartup\\": "src/"
-        }
+            "App\\PruebaPracticaStartup\\": "src/"
+        },
+        "files": [
+            "src/Bootstrap.php"
+        ]
     },
     "script": {
         "test": [
