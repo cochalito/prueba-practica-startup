@@ -17,7 +17,7 @@ class CommandController extends Controller
     /**
      * @var array List of available actions for the command line interface.
      */
-    private $actions = [
+    public $actions = [
         'search' => 'search',
         'install' => 'install'
     ];
@@ -32,9 +32,9 @@ class CommandController extends Controller
      * Executes the specified action based on the provided parameters.
      *
      * @param array $params The parameters for the action.
-     * @return void
+     * @return bool
      */
-    public function executeAction(array $params): void
+    public function executeAction(array $params): bool
     {
         try {
             if (empty($params[1])) {
@@ -44,6 +44,7 @@ class CommandController extends Controller
                     'message' => 'Debe ingrersar un comando de accion a ejecutar.',
                     'footer' => 'Ejemplo: php app.php [accion a ejecutar]'
                 ]);
+                return false;
             }
 
             if (!in_array($params[1], $this->actions)) {
@@ -53,16 +54,19 @@ class CommandController extends Controller
                     'message' => 'Debe ingrersar un comando de accion disponible.',
                     'footer' => 'Acciones disponibles: ' . implode(', ', $this->actions)
                 ]);
+                return false;
             }
             
             $action = $params[1];
             $this->$action($params);
+            return true;
         } catch (\Exception $exception) {
             $this->showMessage([
                 'type' => 'error',
                 'title' => 'Error al validar comando.',
                 'message' => $exception->getMessage()
             ]);
+            return false;
         }
     }
     
@@ -90,9 +94,9 @@ class CommandController extends Controller
      * Searches for resources based on the provided filter.
      *
      * @param array $params The parameters for the search action.
-     * @return void
+     * @return bool
      */
-    public function search(array $params): void
+    public function search(array $params): bool
     {
         try {
             if (empty($params[2])) {
@@ -102,6 +106,7 @@ class CommandController extends Controller
                     'message' => 'Por favor, asegúrese de proporcionar los argumentos requeridos.',
                     'footer' => 'Ejemplo: php app.php search [nombre a buscar]'
                 ]);
+                return false;
             }
 
             if (strlen($params[2]) < 3) {
@@ -110,18 +115,21 @@ class CommandController extends Controller
                     'title' => 'Error al ejecutar el comando.',
                     'message' => 'Por favor, el filtro de busqueda debe tener al menos 3 caracteres.'
                 ]);
+                return false;
             }
 
             $filter = $params[2];
 
             $resourceController = new ResourceController();
             $resourceController->search($filter);
+            return true;
         } catch (\Exception $exception) {
             $this->showMessage([
                 'type' => 'error',
                 'title' => 'Error al validar comando.',
                 'message' => $exception->getMessage()
             ]);
+            return false;
         }
     }
 }

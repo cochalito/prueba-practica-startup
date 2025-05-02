@@ -43,7 +43,6 @@ class Publisher
 
         $messageBody .= "\n\n";
         echo $messageBody;
-        die();
     }
 
     /**

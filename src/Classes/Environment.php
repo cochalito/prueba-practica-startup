@@ -28,7 +28,7 @@ class Environment
     public function __construct(string $path)
     {
         if (!file_exists(filename: $path)) {
-            die('El archivo .env no existe');
+            print 'El archivo .env no existe';
         }
         $this->path = $path;
     }
@@ -38,11 +38,12 @@ class Environment
      *
      * @return void
      */
-    public function load() :void
+    public function load(): bool
     {
         try {
             if (!is_readable($this->path)) {
-                die('El archivo .env no puede leerse');
+                print 'El archivo .env no puede leerse';
+                return false;
             }
     
             $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -61,8 +62,10 @@ class Environment
                     $_SERVER[$name] = $value;
                 }
             }
+            return true;
         } catch (Exception $exception) {
-            die('Error al cargar el archivo .env: ' . $exception->getMessage());
+            print('Error al cargar el archivo .env: ' . $exception->getMessage());
+            return false;
         }
     }
 }

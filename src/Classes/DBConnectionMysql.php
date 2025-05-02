@@ -92,6 +92,19 @@ class DBConnectionMysql implements ConnectionInterface
     }
 
     /**
+     * Verify if the database connection is established.
+     * @return bool True if the connection is established, false otherwise.
+     */
+    public function verifyConnection(): bool
+    {
+        if ($this->dbConnection == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Execute a query on the database.
      * @param string $query Query to execute.
      * @return object Result of the query.
