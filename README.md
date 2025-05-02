@@ -70,5 +70,35 @@ $ php app.php install
 
 ![image](https://github.com/user-attachments/assets/567a21ba-a277-4b66-ab3c-e1f1289b2d4e)
 
+## Ejecución 🚀
 
+_Termianda la instalación podemos proceder a ejecutar la busqueda de recursos con el comando **php app.php search Trabajo**._
+
+```
+$ php app.php search Trabajo
+```
+
+![image](https://github.com/user-attachments/assets/a751d6f8-e221-4a0a-83b7-6d95a2de0870)
+
+
+## Pruebas Unitarias ⚙️
+
+_Para ejecutar las pruebas unitarias elaboradas ejecutamos el comando **vendor/bin/phpunit --colors=true --bootstrap=./tests/Bootstrap.php  ./tests**_
+
+```
+$ vendor/bin/phpunit --colors=true --bootstrap=./tests/Bootstrap.php  ./tests
+```
+![image](https://github.com/user-attachments/assets/41be2dde-7bed-4adc-b986-a9c43633b8d6)
+
+
+## Expresiones de Gratitud 🎁
+
+De antemano muchas gracias por leer y seguir los pasos de este instructivo de instalación.
+
+Espero que esta aplicación cumpla con lo que se espera de ella.
+
+Una vez mas,  miles de Gracias.
+
+<hr/>
+<div align="center">&copy; Brayan Pereyra - <a href="mailto:brayan.angel@gmail.com">brayan.angel@gmail.com</a> - <a href="https://www.linkedin.com/in/brayan-osmar-pereyra-suxo-a6148785">Linkedin</a></div>
 
