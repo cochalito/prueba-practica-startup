@@ -1,16 +1,26 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\PruebaPracticaStartup\Views;
 
+/**
+ * Class Publisher
+ * @package App\PruebaPracticaStartup\Views
+ *
+ * This class is responsible for displaying messages and tables to the user.
+ */
 class Publisher
-{
-    public function showView(string $type, array $params): void
+{  
+    /**
+     * Show a message to the user.
+     *
+     * @param array $params Parameters for the message.
+     * @return void
+     */  
+    public function showMessage(array $params): void
     {
         $messageBody = '';
 
-        switch ($type) {
+        switch ($params['type']) {
             case 'success':
                 $messageBody .= "\n\e[0;32m" . $params['title'] . "\e[0m\n";
                 break;
@@ -25,48 +35,40 @@ class Publisher
                 $messageBody .= "\n\e[0;33m" . $params['title'] . "\e[0m\n";
                 break;
         }
-        $messageBody .= "\033[1m" . $params['message'] . "\033[0m\n\n";
+        $messageBody .= "\033[1m" . $params['message'] . "\033[0m";
 
         if (!empty($params['footer'])) {
-            $messageBody .= "\n\n{$params['footer']}\n\n";
+            $messageBody .= "\n{$params['footer']}";
         }
 
+        $messageBody .= "\n\n";
         echo $messageBody;
+        die();
     }
 
-    public function drawNoData(): string
+    /**
+     * Show a table of resources to the user.
+     *
+     * @param array $result The result set containing resource data.
+     * @return void
+     */
+    public function showTableResources(array $result): void
     {
-        $title = 'Sin registros.';
-        $message = "No se encontraron coincidencias con el filtro ingresado.";
-        return $this->drawNotification('info', $title, $message);
-    }
-    public function drawErrorParams(): string
-    {
-        $title = 'Error al ejecutar el comando.';
-        $message = "Por favor, asegúrese de proporcionar los argumentos requeridos.";
-        $footer = "Ejemplo: php app.php search [nombre a buscar]";
-        return $this->drawNotification('error', $title, $message, $footer);
-    }
-    public function drawErrorLenghtFilter(): string
-    {
-        $title = 'Error al ejecutar el comando.';
-        $message = "Por favor, el filtro de busqueda debe tener al menos 3 caracteres.";
-        return $this->drawNotification('error', $title, $message);
-    }
-
-    public function drawResoursesResult(PDOStatement $result): string
-    {
-        $count = $result->rowCount();
-        if ($count === 0) {
-            return $this->drawNoData();
+        if ($result['total'] == 0) {
+            $this->showMessage( [
+                'type' => 'info',
+                'title' => 'Sin registros encontrados.',
+                'message' => 'No se encontraron coincidencias con el filtro ingresado.'
+            ]);
         }
 
-        $print = '';
-        $print .= "\n\e[0;32mSe encontraron " . $count . " registros con el filtro ingresado.\e[0m\n\n";
+        $message = '';
+        $message .= "\n\e[0;32mSe encontraron " . $result['total'] . " registros con el filtro ingresado.\e[0m\n";
+        $message .= "\e[0;32mMostrando los registros del: " . $result['start'] . ' al ' . $result['limit'] . ".\e[0m\n\n";
         
 
-        $print .= "|ID|\t\t|TIPO|\t\t|NOMBRE|\t\t\t\t|VALOR|"."\n";
-        while ($row = $result->fetch()) {
+        $message .= "|TIPO|\t\t|NOMBRE|\t\t\t\t|VALOR|"."\n";
+        foreach ($result['data'] as $row) {
             $type = $row['type'] == '1' ? 'Clase' : 'Examen';
 
             $value = '[Sin Valor]';
@@ -89,8 +91,9 @@ class Publisher
                     break;
             }
 
-            $print .= "{$row['id']}\t\t$type\t\t{$row['name']}\t$value"."\n";
+            $message .= "$type\t\t{$row['name']}\t$value"."\n";
         }
-        return $print; 
+        echo $message;
+        die();
     }
 }

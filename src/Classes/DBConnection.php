@@ -1,20 +1,33 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\PruebaPracticaStartup\Classes;
 
 use App\PruebaPracticaStartup\Classes\DBConnectionMysql;
 
+/**
+ * Class DBConnection
+ * @package App\PruebaPracticaStartup\Classes
+ *
+ * This class is responsible for creating a connection to the database.
+ */
 class DBConnection
 {
+    
     public $connection;
 
+    /**
+     * DBConnection constructor.
+     */
     public function __construct()
     {
         $this->createConnection();
     }
 
+    /**
+     * Create a connection to the database based on the specified DB engine.
+     *
+     * @return void
+     */
     private function createConnection(): void
     {
         switch ($_ENV['DB_ENGINE']) {

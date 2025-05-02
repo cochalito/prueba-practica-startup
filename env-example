@@ -1,0 +1,10 @@
+APP_NAME = Startup Curso de Idiomas
+APP_ENV = local
+
+DB_ENGINE = mysql
+DB_PORT = 3306
+
+DB_HOST = localhost
+DB_NAME = miDB
+DB_USER = username
+DB_PASS = password
