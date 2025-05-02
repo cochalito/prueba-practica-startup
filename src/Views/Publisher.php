@@ -9,13 +9,13 @@ namespace App\PruebaPracticaStartup\Views;
  * This class is responsible for displaying messages and tables to the user.
  */
 class Publisher
-{  
+{
     /**
      * Show a message to the user.
      *
      * @param array $params Parameters for the message.
      * @return void
-     */  
+     */
     public function showMessage(array $params): void
     {
         $messageBody = '';
@@ -54,17 +54,20 @@ class Publisher
      */
     public function showTableResources(array $result): void
     {
-        if ($result['total'] == 0) {
-            $this->showMessage( [
+        $total = $result['total'];
+        if ($total == 0) {
+            $this->showMessage([
                 'type' => 'info',
                 'title' => 'Sin registros encontrados.',
                 'message' => 'No se encontraron coincidencias con el filtro ingresado.'
             ]);
         }
 
+        $start = $result['start'];
+        $limit = $result['limit'];
         $message = '';
-        $message .= "\n\e[0;32mSe encontraron " . $result['total'] . " registros con el filtro ingresado.\e[0m\n";
-        $message .= "\e[0;32mMostrando los registros del: " . $result['start'] . ' al ' . $result['limit'] . ".\e[0m\n\n";
+        $message .= "\n\e[0;32mSe encontraron " . $total . " registros con el filtro ingresado.\e[0m\n";
+        $message .= "\e[0;32mMostrando los registros del: " . $start . ' al ' . $limit . ".\e[0m\n\n";
         
 
         $message .= "|TIPO|\t\t|NOMBRE|\t\t\t\t|VALOR|"."\n";

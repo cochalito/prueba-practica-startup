@@ -12,7 +12,7 @@ use Exception;
  *
  * @package App\PruebaPracticaStartup\Controllers
  */
-abstract class Controller 
+abstract class Controller
 {
     /**
      * @var Publisher Instance of the Publisher class for displaying messages.
@@ -26,7 +26,7 @@ abstract class Controller
     public function __construct()
     {
         $this->publisher = new Publisher();
-    }   
+    }
 
     /**
      * Show a message to the user.

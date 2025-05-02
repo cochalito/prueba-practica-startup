@@ -1,4 +1,4 @@
-<?php   
+<?php
 
 namespace App\PruebaPracticaStartup\Classes;
 
@@ -26,7 +26,7 @@ class DBConnectionMysql implements ConnectionInterface
      * @var string Password of the database server.
      */
     private $dbPass;
-    /**   
+    /**
      * @var string Database name.
      */
     private $dbName;
@@ -73,11 +73,11 @@ class DBConnectionMysql implements ConnectionInterface
             return true;
         } catch (PDOException $exception) {
             $publisher = new Publisher();
-            $publisher->showMessage( [
+            $publisher->showMessage([
                 'type' => 'error',
                 'title' => 'Error en Connection a DB',
-                'message' => $exception->getMessage()]
-            );
+                'message' => $exception->getMessage()
+            ]);
             die();
         }
     }
@@ -104,7 +104,7 @@ class DBConnectionMysql implements ConnectionInterface
             $this->closeConnection();
         } catch (Exception $exception) {
             $publisher = new Publisher();
-            $publisher->showMessage( [
+            $publisher->showMessage([
                 'type' => 'error',
                 'title' => 'Error al ejecutar query',
                 'message' => $exception->getMessage()
@@ -134,11 +134,11 @@ class DBConnectionMysql implements ConnectionInterface
             }
         } catch (Exception $exception) {
             $publisher = new Publisher();
-            $publisher->showMessage( [
+            $publisher->showMessage([
                 'type' => 'error',
                 'title' => 'Error al ejecutar creacion e insercion de datos a la tabla',
-                'message' => $exception->getMessage()]
-            );
+                'message' => $exception->getMessage()
+            ]);
             die();
         }
         return true;

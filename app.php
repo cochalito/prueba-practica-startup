@@ -6,4 +6,3 @@ use App\PruebaPracticaStartup\Controllers\CommandController;
 
 $commandController = new CommandController();
 $commandController->executeAction($argv);
-

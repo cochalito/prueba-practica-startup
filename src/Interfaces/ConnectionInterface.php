@@ -6,7 +6,8 @@ namespace App\PruebaPracticaStartup\Interfaces;
  * Interface ConnectionInterface
  * @package App\PruebaPracticaStartup\Interfaces
  */
-interface ConnectionInterface {
+interface ConnectionInterface
+{
     /**
      * Create a connection to the database.
      * @return bool True if the connection is successful, false otherwise.
@@ -26,4 +27,3 @@ interface ConnectionInterface {
      */
     public function executeQuery($query): object;
 }
-

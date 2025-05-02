@@ -1,4 +1,4 @@
-<?php   
+<?php
 
 namespace App\PruebaPracticaStartup\Models;
 
@@ -28,7 +28,8 @@ class ResourcesModel extends Model
      * ResourcesModel constructor.
      * Initializes the database connection.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->connection = new DBConnection()->connection;
     }
 

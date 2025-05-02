@@ -96,7 +96,7 @@ class CommandController extends Controller
     {
         try {
             if (empty($params[2])) {
-                $this->showMessage( [
+                $this->showMessage([
                     'type' => 'error',
                     'title' => 'Error al ejecutar el comando.',
                     'message' => 'Por favor, asegúrese de proporcionar los argumentos requeridos.',
@@ -105,7 +105,7 @@ class CommandController extends Controller
             }
 
             if (strlen($params[2]) < 3) {
-                $this->showMessage( [
+                $this->showMessage([
                     'type' => 'error',
                     'title' => 'Error al ejecutar el comando.',
                     'message' => 'Por favor, el filtro de busqueda debe tener al menos 3 caracteres.'

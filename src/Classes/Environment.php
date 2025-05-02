@@ -3,6 +3,7 @@
 namespace App\PruebaPracticaStartup\Classes;
 
 use Exception;
+
 /**
  * Class Environment
  *
@@ -26,7 +27,7 @@ class Environment
      */
     public function __construct(string $path)
     {
-        if(!file_exists(filename: $path)) {
+        if (!file_exists(filename: $path)) {
             die('El archivo .env no existe');
         }
         $this->path = $path;
